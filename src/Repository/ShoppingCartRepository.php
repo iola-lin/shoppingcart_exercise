@@ -16,6 +16,7 @@ class ShoppingCartRepository
 
     /**
      * Add the product into the shopping cart
+     * @param App\Product
      */
     protected function addProduct(Product $product)
     {
@@ -23,18 +24,28 @@ class ShoppingCartRepository
     }
 
     /**
+     * @return collection
+     */
+    protected function getProducts()
+    {
+        return $this->shoppoing_cart->products()->get();
+    }
+
+    /**
      * The total price of all the products in the shopping cart
+     * @return double
      */
     protected function totalPrice()
     {
-
+        return $this->getProducts()->sum('price');
     }
 
     /**
      * The total number of the products in the shopping cart
+     * @return integer
      */
     protected function totalProducts()
     {
-
+        return $this->getProducts()->count();
     }
 }
